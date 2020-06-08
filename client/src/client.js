@@ -11,11 +11,12 @@ const writeEvent = (text) => {
   parent.appendChild(el);
 };
 
+//when user picks RPS
 const addButtonListeners = () => {
-  ['rock', 'paper', 'scissors'].forEach((id) => {
+  ['rock', 'paper', 'scissors'].forEach((id) => { //ID of the Buttons
     const button = document.getElementById(id); //store ID tag in button variable
-    button.addEventListener('click', () => {
-      sock.emit('turn', id);
+    button.addEventListener('click', () => { //when button clicked
+      sock.emit('turn', id); //emit to rps-game.js
     });
   });
 };
@@ -24,6 +25,6 @@ writeEvent('Welcome to RPS');
 
 //global object io() to establish a connect to the server.js
 const sock = io();
-sock.on('message', writeEvent);
+sock.on('message', writeEvent);  //listen to the event
 
 addButtonListeners();

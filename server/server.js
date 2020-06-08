@@ -2,6 +2,7 @@ const http = require('http'); //import HTTP
 const express = require('express'); // import express
 const socketio = require('socket.io');// import socket.io
 
+//including file rps-game.rps
 const RpsGame = require('./rps-game');
 
 //express handling the connection
@@ -30,11 +31,12 @@ io.on('connection', (sock) => {
     waitingPlayer = null;
   } else { //if waitingPlayer is null
     waitingPlayer = sock; //set to sock
-    waitingPlayer.emit('message', 'Waiting for an opponent');
+    waitingPlayer.emit('message', 'Waiting for an opponent'); 
   }
 
+// listen to the event
   sock.on('message', (text) => {
-    io.emit('message', text);
+    io.emit('message', text); // emit an event to all connected sockets
   });
 });
 
